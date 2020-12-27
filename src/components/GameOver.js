@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Mark from "./Mark";
+import Amitabh from "./Amitabh";
 import gameOver from "../assets/gameover.png";
 import { interjection, slur, insultingSentence } from "../insults";
 import { useDispatch, useSelector } from "react-redux";
@@ -135,7 +135,7 @@ export default function GameOver() {
       <Div>
         <Confetti active={partyTime} config={confettiConfig()} />
       </Div>
-      <Mark
+      <Amitabh
         status={"Remains uncontested"}
         dialogue={splitDialogue()}
         movieList={movieList}

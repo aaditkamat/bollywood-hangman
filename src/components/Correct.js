@@ -1,5 +1,5 @@
 import React from "react";
-import Mark from "./Mark";
+import Amitabh from "./Amitabh";
 import Span from "../styled/Span";
 import { slur } from "../insults";
 
@@ -20,5 +20,5 @@ export default function Correct() {
     );
   };
 
-  return <Mark status={"Is visibly upset"} dialogue={splitDialogue()} />;
+  return <Amitabh status={"Is visibly upset"} dialogue={splitDialogue()} />;
 }

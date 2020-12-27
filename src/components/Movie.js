@@ -4,7 +4,7 @@ import Keyboard from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
 import KeyboardEventHandler from "react-keyboard-event-handler";
 
-import Mark from "./Mark";
+import Amitabh from "./Amitabh";
 
 export default function Movie() {
   const { letters } = useSelector(state => state.movie);
@@ -78,7 +78,7 @@ export default function Movie() {
 
   return (
     <div>
-      <Mark plot={data?.plot} actors={data?.actors} director={data?.director} />
+      <Amitabh plot={data?.plot} actors={data?.actors} director={data?.director} />
 
       {/* // margin for keyboard */}
       {isMobile && (

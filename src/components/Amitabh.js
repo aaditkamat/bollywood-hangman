@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
-import smile from "../assets/smile.png";
+import smile from "../assets/smile.jpg";
 import grin from "../assets/grin.png";
 import laugh from "../assets/laugh.png";
 import mad from "../assets/mad.png";
@@ -45,13 +45,13 @@ const svgStyle = () => {
   const windowWidth = window.innerWidth;
 
   if (windowWidth >= 600) {
-    return { width: "140px", height: "140px" };
+    return { width: "200px", height: "200px" };
   } else if (windowWidth >= 460) {
     return { width: "120px", height: "120px" };
   } else return { width: "100px", height: "100px" };
 };
 
-function Mark(props) {
+function Amitabh(props) {
   const { score } = useSelector(state => state.game);
   const { tries, gotCorrect } = useSelector(state => state.movie);
 
@@ -60,7 +60,7 @@ function Mark(props) {
     if (tries <= 1 && gotCorrect === false)
       return (
         <a
-          href='https://buymeacoffee.com/2spacemilk'
+          href='https://aaditkamat.me'
           target='_blank'
           rel='noopener noreferrer'>
           <img src={laugh} style={svgStyle()} alt='avatar' />
@@ -69,7 +69,7 @@ function Mark(props) {
     if (gotCorrect)
       return (
         <a
-          href='https://buymeacoffee.com/2spacemilk'
+          href='https://aaditkamat.me'
           target='_blank'
           rel='noopener noreferrer'>
           <img src={mad} style={svgStyle()} alt='avatar' />
@@ -78,7 +78,7 @@ function Mark(props) {
     if (score !== null)
       return (
         <a
-          href='https://buymeacoffee.com/2spacemilk'
+          href='https://aaditkamat.me'
           target='_blank'
           rel='noopener noreferrer'>
           <img src={grin} style={svgStyle()} alt='avatar' />
@@ -87,7 +87,7 @@ function Mark(props) {
 
     return (
       <a
-        href='https://buymeacoffee.com/2spacemilk'
+        href='https://aaditkamat.me'
         target='_blank'
         rel='noopener noreferrer'>
         <img src={smile} style={svgStyle()} alt='avatar' />
@@ -102,9 +102,9 @@ function Mark(props) {
           {showEmotion()}
 
           <div>
-            <H3>Mark, Movie Snob</H3>
+            <H3>Amitabh Bachchan, Bollywood Superstar </H3>
             <P style={{ margin: "2px 0 0 1rem" }}>
-              {props.status || (tries !== 0 && <GuessedLetters />)}
+              {tries !== 0 && <GuessedLetters />}
             </P>
           </div>
         </Div>
@@ -130,4 +130,4 @@ function Mark(props) {
   );
 }
 
-export default Mark;
+export default Amitabh;
