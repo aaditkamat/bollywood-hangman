@@ -8,8 +8,6 @@ import Div from "../styled/Div";
 import Button from "../styled/Button";
 import Img from "../styled/Img";
 
-const TotallyRandom = require("totally-random");
-const random = new TotallyRandom();
 
 export default function GameOver() {
   const [partyTime, setPartyTime] = useState(false);
@@ -48,7 +46,7 @@ export default function GameOver() {
   };
 
   const scoreSentence = () => {
-    if (moviesPlayed.length == 1) {
+    if (moviesPlayed.length === 1) {
       return "You didn't get any correct";
     }
     else {
