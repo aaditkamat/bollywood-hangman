@@ -1,56 +1,39 @@
 import re
+import os
 import json
 import requests
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
 
+# * last scraped on December 27, 2020
 
-# * last scraped on October 28, 2020
-
+load_dotenv()
 
 page_num = 1
 movie_ids = []
 movie_data = []
 
+api_key = os.getenv('OMDB_API_KEY')
 
-while page_num <= 951:
-    page = requests.get(
-        f"https://www.imdb.com/search/title/?groups=top_1000&sort=user_rating,desc&start={page_num}&ref_=adv_nxt").text
+response = requests.get(
+        f"https://www.imdb.com/india/top-rated-indian-movies/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=461131e5-5af0-4e50-bee2-223fad1e00ca&pf_rd_r=06N438KJ8C6K9M14VSN3&pf_rd_s=center-1&pf_rd_t=60601&pf_rd_i=india.toprated&ref_=fea_india_ss_toprated_india_tr_india250_sm").text
 
-    soup = BeautifulSoup(page, 'html.parser')
-    ribbonize = soup.find_all('div', 'ribbonize')
+soup = BeautifulSoup(response, 'html.parser')
+titles = soup.select('#main > div > span > div > div > div.lister > table > tbody > tr> td.titleColumn > a')
 
-    for movie in ribbonize:
-        # extracts IMDb ID
-        regex = re.search("tt\S{7}", str(movie))
-        movie_ids.append(regex.group(0))
-
-        print(regex.group(0))
-
-    page_num += 50
-
-
-# obscure movies to remove
-movies_to_remove = ['tt1306980', 'tt8579674', 'tt0056801', 'tt0416449', "tt1043150", "tt8239946", "tt0986264", "tt3417422", "tt7838252", "tt4849438",
-                    "tt3322420", "tt1954470", "tt1620933", "tt0375611", "tt2395469", "tt2283748", "tt1562872", "tt3863552", "tt8108198", "tt1639426", "tt2338151", "tt2350496"]
-for movie in movies_to_remove:
-    movie_ids.remove(movie)
+for title in titles:
+    # extracts IMDb ID
+    regex = re.search("tt\S{7}", str(title))
+    movie_ids.append(regex.group(0))
 
 # scrapes for json movie data
 for movie_id in movie_ids:
-
-    movie_json = requests.get(
-        f"https://www.omdbapi.com/?i={movie_id}&apikey=80e59555").json()
+    url = f"http://www.omdbapi.com/?i={movie_id}&apikey={api_key}"
+    movie_json = requests.get(url).json()
 
     movie_json['imdbID'] = movie_id
     movie_data.append(movie_json)
 
-    print(movie_json['Title'])
-
-# removes Bollywood movies
-# partly works
-for movie in movie_data:
-    if movie['Country'] == 'India':
-        movie_data.remove(movie)
 
 # converts to JSON and writes to file
 with open('movie_data.json', 'w') as f:
