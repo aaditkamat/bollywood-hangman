@@ -2,10 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
-import smile from "../assets/smile.jpg";
-import grin from "../assets/grin.png";
-import laugh from "../assets/laugh.png";
-import mad from "../assets/mad.png";
+import smile from "../assets/amitabh.jpg";
 
 import Title from "./Title";
 import GuessedLetters from "./GuessedLetters";
@@ -53,53 +50,18 @@ const svgStyle = () => {
 
 function Amitabh(props) {
   const { score } = useSelector(state => state.game);
-  const { tries, gotCorrect } = useSelector(state => state.movie);
-
-  const showEmotion = () => {
-    // decides which face to show
-    if (tries <= 1 && gotCorrect === false)
-      return (
-        <a
-          href='https://aaditkamat.me'
-          target='_blank'
-          rel='noopener noreferrer'>
-          <img src={laugh} style={svgStyle()} alt='avatar' />
-        </a>
-      );
-    if (gotCorrect)
-      return (
-        <a
-          href='https://aaditkamat.me'
-          target='_blank'
-          rel='noopener noreferrer'>
-          <img src={mad} style={svgStyle()} alt='avatar' />
-        </a>
-      );
-    if (score !== null)
-      return (
-        <a
-          href='https://aaditkamat.me'
-          target='_blank'
-          rel='noopener noreferrer'>
-          <img src={grin} style={svgStyle()} alt='avatar' />
-        </a>
-      );
-
-    return (
-      <a
-        href='https://aaditkamat.me'
-        target='_blank'
-        rel='noopener noreferrer'>
-        <img src={smile} style={svgStyle()} alt='avatar' />
-      </a>
-    );
-  };
+  const { tries } = useSelector(state => state.movie);
 
   return (
     <div>
       <Card>
         <Div flexStart style={{ marginBottom: "1rem" }}>
-          {showEmotion()}
+          <a
+            href='https://aaditkamat.me'
+            target='_blank'
+            rel='noopener noreferrer'>
+            <img src={smile} style={svgStyle()} alt='avatar' />
+          </a>
 
           <div>
             <H3>Amitabh Bachchan, Bollywood Superstar </H3>

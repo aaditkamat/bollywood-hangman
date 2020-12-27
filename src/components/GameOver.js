@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Amitabh from "./Amitabh";
 import gameOver from "../assets/gameover.png";
-import { interjection, slur, insultingSentence } from "../insults";
 import { useDispatch, useSelector } from "react-redux";
 import Confetti from "react-dom-confetti";
 
-import Span from "../styled/Span";
 import Div from "../styled/Div";
 import Button from "../styled/Button";
 import Img from "../styled/Img";
@@ -50,63 +48,16 @@ export default function GameOver() {
   };
 
   const scoreSentence = () => {
-    if (moviesPlayed.length - 1 === 0) {
-      return "you didn't get _any_ correct";
-    } else if (moviesPlayed.length - 1 === 1) {
-      return "you only got _one_ movie correct";
-    } else return `you only got _num_ correct`;
-  };
-
-  const dialogue = `${interjection()}, ${scoreSentence()}! ${insultingSentence()}, you _slur_! Even
-  your mom managed to get ${random.to(5) + moviesPlayed.length - 1} right
-  when we played last night, ha!`;
-
-  const splitDialogue = () => {
-    // splits dialogue to add css styling to score and slur
-    const beforeSlur = dialogue.split("_slur_")[0];
-    const afterSlur = dialogue.split("_slur_")[1];
-
-    if (scoreSentence().includes("_any_")) {
-      const beforeSplit = beforeSlur.split("_any_")[0];
-      const afterSplit = beforeSlur.split("_any_")[1];
-
-      return (
-        <>
-          {beforeSplit}
-          <Span score>any</Span>
-          {afterSplit}
-          <Span>{slur()}</Span>
-          {afterSlur}
-        </>
-      );
-    } else if (scoreSentence().includes("_one_")) {
-      const beforeSplit = beforeSlur.split("_one_")[0];
-      const afterSplit = beforeSlur.split("_one_")[1];
-
-      return (
-        <>
-          {beforeSplit}
-          <Span score>one</Span>
-          {afterSplit}
-          <Span>{slur()}</Span>
-          {afterSlur}
-        </>
-      );
-    } else {
-      const beforeSplit = beforeSlur.split("_num_")[0];
-      const afterSplit = beforeSlur.split("_num_")[1];
-
-      return (
-        <div>
-          {beforeSplit}
-          <Span score>{moviesPlayed.length - 1}</Span>
-          {afterSplit}
-          <Span>{slur()}</Span>
-          {afterSlur}
-        </div>
-      );
+    if (moviesPlayed.length == 1) {
+      return "You didn't get any correct";
+    }
+    else {
+      const grammar = moviesPlayed.length === 2 ? "movie": "movies";
+      return `You only got ${moviesPlayed.length - 1} ${grammar} correct`;
     }
   };
+
+  const dialogue = `${scoreSentence()}! Better luck next time.`;
 
   // displays movie data on screen
   let id = 0;
@@ -137,25 +88,11 @@ export default function GameOver() {
       </Div>
       <Amitabh
         status={"Remains uncontested"}
-        dialogue={splitDialogue()}
+        dialogue={dialogue}
         movieList={movieList}
       />
 
       <Div flexEnd>
-        {/* <a
-          href='https://buymeacoffee.com/2spacemilk'
-          target='_blank'
-          rel='noopener noreferrer'>
-          <Button leftButton>Buy Me a Coffee</Button>
-        </a> */}
-
-        <a
-          href='https://www.linkedin.com/in/harlessmark/'
-          target='_blank'
-          rel='noopener noreferrer'>
-          <Button leftButton>Hire Me</Button>
-        </a>
-
         <Button onClick={playAgain}>Try Again</Button>
       </Div>
     </>
