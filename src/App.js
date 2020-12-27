@@ -54,7 +54,7 @@ export default function App() {
   return (
     <Wrapper>
       {/* header */}
-      {score === null && <Img src={logo} alt='hollywood hangman' />}
+      {score === null && <Img src={logo} alt='bollywood hangman' />}
       {score !== null && tries !== 0 && <ScoreBoard />}
 
       {/* main content */}
