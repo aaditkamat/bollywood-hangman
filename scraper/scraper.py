@@ -33,6 +33,7 @@ for movie_id in movie_ids:
 
     movie_json['imdbID'] = movie_id
     movie_data.append(movie_json)
+    movie_data = list(filter(lambda movie_json: "Hindi" in movie_json["Language"], movie_data))
 
 
 # converts to JSON and writes to file
